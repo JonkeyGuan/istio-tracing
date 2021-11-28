@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: normal-service-a
+  name: normal
 spec:
   selector:
     istio: ingressgateway # use istio default controller
@@ -11,7 +11,7 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - "normal-service-a-istio-system.apps.ocp1.example.com"
+        - "normal-istio-system.apps.ocp1.example.com"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -19,9 +19,9 @@ metadata:
   name: normal-service-a
 spec:
   hosts:
-    - "normal-service-a-istio-system.apps.ocp1.example.com"
+    - "normal-istio-system.apps.ocp1.example.com"
   gateways:
-    - normal-service-a
+    - normal
   http:
     - match:
         - uri:
