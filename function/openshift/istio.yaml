@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: function
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "function-istio-system.apps.ocp1.example.com"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: function
+spec:
+  hosts:
+    - "function-istio-system.apps.ocp1.example.com"
+  gateways:
+    - function
+  http:
+    - match:
+        - uri:
+            prefix: /hello
+      route:
+        - destination:
+            host: service-a
+            port:
+              number: 8080
