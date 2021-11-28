@@ -1,4 +1,4 @@
-package com.example.servicea;
+package com.example.serviceb;
 
 import java.util.Map;
 
