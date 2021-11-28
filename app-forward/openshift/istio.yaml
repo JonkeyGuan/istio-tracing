@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: app-forward-service-a
+  name: app-forward
 spec:
   selector:
     istio: ingressgateway # use istio default controller
@@ -16,12 +16,12 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: app-forward-service-a
+  name: app-forward
 spec:
   hosts:
     - "app-forward-service-a-istio-system.apps.ocp1.example.com"
   gateways:
-    - app-forward-service-a
+    - app-forward
   http:
     - match:
         - uri:
